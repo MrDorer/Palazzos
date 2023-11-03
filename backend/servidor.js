@@ -213,6 +213,20 @@ app.get("/carrito",(peticion,respuesta)=>{
     })
 })
 
+app.put("/carrito/agregar",(req,res)=>{
+    const datos = req.body
+    console.log(datos)
+    const sql="INSERT INTO carrito (id_usuario, id_producto, cantidad) VALUES (?, ?, 1);"
+    const values = [datos.user, datos.producto]
+    conexion.query(sql,values,(error,resultado)=>{
+        if(error){
+            return res.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{  
+            return res.json(resultado)
+        }
+    })
+})
+
 app.put("/carrito/suma/:id",(req,res) => {
     const id = req.params.id;
     const sql = "UPDATE carrito SET cantidad = (cantidad + 1) WHERE id = ?;"

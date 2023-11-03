@@ -4,8 +4,28 @@ import axios from 'axios'
 function Productos() {
 
     const [productos, setProductos] = useState([]);
+    const [carrito,setCarrito] = useState({
+      user: '',
+      producto: ''
+    })
+
+    const handleAnadir = (id) => {
+      // Update the carrito state using the callback function
+      setCarrito((prevCarrito) => {
+        return { ...prevCarrito, producto: id };
+      });
+    
+      // Now you can access the updated carrito state
+      axios.put('http://localhost:8082/carrito/agregar', carrito)
+        .then((respuesta) => {
+          console.log(respuesta);
+        })
+        .catch((error) => console.log(error));
+    };
   
     useEffect(() => {
+      const user = localStorage.getItem('user')
+      setCarrito({user: user})
       axios.get('http://localhost:8082/productosM')
         .then((respuesta) => {
           setProductos(respuesta.data.categorias);
@@ -33,7 +53,7 @@ function Productos() {
                     <div className=' h-6 m-2'>
                         <p className='font-bold text-center mb-4'>${producto.precio} MXN</p>
                     </div>
-                    <button className='text-xs border-[#2972B6] border-2 text-[#2972B6] rounded-md px-1'>Comprar</button>
+                    <button className='text-xs border-[#2972B6] border-2 text-[#2972B6] rounded-md px-1' onClick={() => {handleAnadir(producto.id)}}>Comprar</button>
                 </div>
             </div>
 
