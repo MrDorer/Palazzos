@@ -280,6 +280,31 @@ app.delete("/usuario/eliminar/:id",(req,res) => {
     })
 })
 
+app.delete("/producto/eliminar/:id",(req,res) => {
+    const id = req.params.id;
+    const sql = "DELETE FROM productos WHERE id = ?;"
+    const values = [id]
+
+    conexion.query(sql,values,(error,resultado) => {
+        if(error){
+            return res.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{
+            return res.json({Estatus:"Ok", productos:resultado})
+        }
+    })
+})
+
+app.get("/productos",(peticion,respuesta)=>{
+    const sql="SELECT * FROM productos"
+    conexion.query(sql,(error,resultado)=>{
+        if(error){
+            return respuesta.json({Error:"Upppsie whopsie, alguien configuro mal su back"})
+        } else{  
+            return respuesta.json({Estatus:"Ok", productos:resultado})
+        }
+    })
+})
+
 app.listen(8082,()=>{
     console.log('Servidor disponible')
 })
