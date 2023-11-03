@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 function ProductosPopM() {
@@ -15,6 +16,7 @@ function ProductosPopM() {
   
     return (
       <>
+     
       <div className="flex flex-wrap justify-center p-6 gap-2">
       <h2 className='w-[100%]'>Productos populares</h2>
         {productos ? (
@@ -27,6 +29,7 @@ function ProductosPopM() {
           <p>Loading...</p>
         )}
       </div>
+      
       </>
     );
   } 

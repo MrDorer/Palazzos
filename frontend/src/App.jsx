@@ -9,6 +9,9 @@ import Categoria from './pages/Categorias'
 import Nosotros from './pages/Nosotros'
 import Login from './pages/Login'
 import Registro from './pages/Registro'
+import Productos from './pages/Productos'
+import Carro from './pages/Carro'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +28,9 @@ function App() {
           <Route path="/nosotros" element={<Nosotros/>}></Route>
           <Route path="/login" element={<Login/>}></Route>
           <Route path="/registro" element={<Registro/>}></Route>
+          <Route path="/productos" element={<Productos/>}></Route>
+          <Route path="/carro" element={<Carro/>}></Route>
+          <Route path="/dashboard" element={<Dashboard/>}></Route>
         </Routes>
         <Footer/>
       </BrowserRouter>
